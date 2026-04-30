@@ -56,14 +56,15 @@ function App() {
     <div className="min-h-screen w-full relative overflow-hidden paper-texture md:flex md:h-screen md:items-stretch">
       {/* Left / Main Section */}
       <div className="flex-1 flex flex-col items-center justify-center relative z-10 py-12 px-6 overflow-y-auto">
-        <header className="text-center mb-8 md:mb-12 relative w-full max-w-lg">
-          <div className="absolute right-0 top-0">
+        <header className="mb-8 md:mb-12 w-full max-w-lg flex flex-col items-center relative">
+          <div className="w-full flex justify-end mb-2">
             <button 
               onClick={() => setCurrentView('info')}
-              className="p-2 rounded-full bg-black/5 hover:bg-black/10 transition-colors text-vangogh-deepBrown"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-vangogh-deepBrown/5 hover:bg-vangogh-deepBrown/10 transition-colors text-vangogh-deepBrown"
               title="Teoria & História"
             >
-              <BookOpen className="w-5 h-5" />
+              <BookOpen className="w-4 h-4" />
+              <span className="text-xs font-sans uppercase tracking-widest font-semibold">Teoria</span>
             </button>
           </div>
           <motion.h1 

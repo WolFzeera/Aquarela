@@ -105,11 +105,29 @@ export default function InfoPage({ onClose }) {
         
         {/* CMY SVG Diagram */}
         <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 bg-white rounded-full shadow-inner flex items-center justify-center">
-          <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full mix-blend-multiply opacity-80" style={{ backgroundColor: '#00FFFF', transform: 'translate(-20%, 20%)' }} />
-          <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full mix-blend-multiply opacity-80" style={{ backgroundColor: '#FF00FF', transform: 'translate(20%, 20%)' }} />
-          <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full mix-blend-multiply opacity-80" style={{ backgroundColor: '#FFFF00', transform: 'translate(0, -30%)' }} />
+          <motion.div 
+            whileHover={{ scale: 1.1, zIndex: 10 }}
+            drag
+            dragConstraints={{ top: -20, left: -20, right: 20, bottom: 20 }}
+            className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full mix-blend-multiply opacity-80 cursor-grab active:cursor-grabbing" 
+            style={{ backgroundColor: '#00FFFF', transform: 'translate(-20%, 20%)' }} 
+          />
+          <motion.div 
+            whileHover={{ scale: 1.1, zIndex: 10 }}
+            drag
+            dragConstraints={{ top: -20, left: -20, right: 20, bottom: 20 }}
+            className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full mix-blend-multiply opacity-80 cursor-grab active:cursor-grabbing" 
+            style={{ backgroundColor: '#FF00FF', transform: 'translate(20%, 20%)' }} 
+          />
+          <motion.div 
+            whileHover={{ scale: 1.1, zIndex: 10 }}
+            drag
+            dragConstraints={{ top: -20, left: -20, right: 20, bottom: 20 }}
+            className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full mix-blend-multiply opacity-80 cursor-grab active:cursor-grabbing" 
+            style={{ backgroundColor: '#FFFF00', transform: 'translate(0, -30%)' }} 
+          />
         </div>
-        <p className="text-xs font-sans text-gray-500 italic text-center">Intersecção CMY: A mistura total absorve toda a luz, resultando em um negro neutro intenso.</p>
+        <p className="text-xs font-sans text-gray-500 italic text-center">Intersecção CMY: Arraste os círculos para ver a absorção de luz.</p>
       </section>
 
       {/* Recommended Harmonies */}
@@ -117,7 +135,11 @@ export default function InfoPage({ onClose }) {
         <h3 className="text-2xl font-serif text-vangogh-deepBrown mb-6">Harmonias Recomendadas</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {harmonies.map((harmony, i) => (
-            <div key={i} className="bg-white/50 rounded-xl p-4 border border-white/40 shadow-sm hover:shadow-md transition-shadow">
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-white/50 rounded-xl p-4 border border-white/40 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
               <h4 className="font-serif text-md text-vangogh-deepBrown mb-2">{harmony.name}</h4>
               <div className="flex gap-2 mb-3">
                 {harmony.colors.map((hex, j) => (
