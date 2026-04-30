@@ -6,14 +6,14 @@ import { X } from 'lucide-react';
 
 export default function MixingSwatches({ color, onClose, onAdd }) {
   const [ratio, setRatio] = useState(50); // 50% catalog, 50% palette
-  const [selectedMixture, setSelectedMixture] = useState(null);
+  const [selectedPrimaryId, setSelectedPrimaryId] = useState(null);
 
   useEffect(() => {
-    setSelectedMixture(null);
+    setSelectedPrimaryId(null);
     setRatio(50);
   }, [color]);
 
-  const activeColor = selectedMixture || color;
+
 
   // Pre-calculate the 4 mixtures based on current ratio
   const mixtures = useMemo(() => {
@@ -29,6 +29,9 @@ export default function MixingSwatches({ color, onClose, onAdd }) {
       };
     });
   }, [color, ratio]);
+
+  const activeMixture = selectedPrimaryId ? mixtures.find(m => m.id === selectedPrimaryId) : null;
+  const activeColor = activeMixture || color;
 
   if (!color) return null;
 
@@ -56,7 +59,7 @@ export default function MixingSwatches({ color, onClose, onAdd }) {
           {activeColor.mixedName || activeColor.name}
         </span>
         <span className="text-[10px] text-gray-500 uppercase tracking-widest text-center mt-1">
-          {selectedMixture ? 'Mistura Personalizada' : color.category}
+          {activeMixture ? 'Mistura Personalizada' : color.category}
         </span>
       </div>
 
@@ -71,15 +74,8 @@ export default function MixingSwatches({ color, onClose, onAdd }) {
           min="0" 
           max="100" 
           value={ratio}
-          onChange={(e) => {
-            setRatio(Number(e.target.value));
-            // Update selected mixture immediately if one is selected
-            if (selectedMixture) {
-              const updated = mixtures.find(m => m.id === selectedMixture.id);
-              if (updated) setSelectedMixture(updated);
-            }
-          }}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-vangogh-indigo"
+          onChange={(e) => setRatio(Number(e.target.value))}
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-vangogh-indigo touch-none"
         />
       </div>
 
@@ -90,15 +86,15 @@ export default function MixingSwatches({ color, onClose, onAdd }) {
         {mixtures.map((mix) => (
           <motion.div 
             key={mix.id} 
-            className={`flex flex-col items-center cursor-pointer relative z-50 pointer-events-auto p-3 rounded-xl transition-colors ${selectedMixture?.id === mix.id ? 'bg-black/5 ring-1 ring-black/10' : 'hover:bg-black/5'}`}
-            onClick={() => setSelectedMixture(mix)}
+            className={`flex flex-col items-center cursor-pointer relative z-50 pointer-events-auto p-3 rounded-xl transition-colors ${selectedPrimaryId === mix.id ? 'bg-black/5 ring-1 ring-black/10' : 'hover:bg-black/5'}`}
+            onClick={() => setSelectedPrimaryId(mix.id)}
             whileTap={{ scale: 0.95 }}
           >
             <div 
               className="w-14 h-14 rounded-full organic-edge shadow-sm mb-2 relative"
               style={{ backgroundColor: mix.mixedHex }}
             >
-               {selectedMixture?.id === mix.id && (
+               {selectedPrimaryId === mix.id && (
                   <motion.div 
                     layoutId="outline"
                     className="absolute -inset-1 rounded-full border border-vangogh-indigo"
