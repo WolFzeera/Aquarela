@@ -5,6 +5,8 @@ import BottomSheet from './components/BottomSheet';
 import { existingPalette } from './data/colors';
 import MixingSwatches from './components/MixingSwatches';
 import Catalog from './components/Catalog';
+import InfoPage from './components/InfoPage';
+import { BookOpen } from 'lucide-react';
 
 function App() {
   const [palette, setPalette] = useState(() => {
@@ -22,6 +24,7 @@ function App() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [activeSlotIndex, setActiveSlotIndex] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [currentView, setCurrentView] = useState('palette');
 
   useEffect(() => {
     localStorage.setItem('aquarelaPalette_v2', JSON.stringify(palette));
@@ -53,7 +56,16 @@ function App() {
     <div className="min-h-screen w-full relative overflow-hidden paper-texture md:flex md:h-screen md:items-stretch">
       {/* Left / Main Section */}
       <div className="flex-1 flex flex-col items-center justify-center relative z-10 py-12 px-6 overflow-y-auto">
-        <header className="text-center mb-8 md:mb-12">
+        <header className="text-center mb-8 md:mb-12 relative w-full max-w-lg">
+          <div className="absolute right-0 top-0">
+            <button 
+              onClick={() => setCurrentView('info')}
+              className="p-2 rounded-full bg-black/5 hover:bg-black/10 transition-colors text-vangogh-deepBrown"
+              title="Teoria & História"
+            >
+              <BookOpen className="w-5 h-5" />
+            </button>
+          </div>
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -71,20 +83,40 @@ function App() {
           </motion.p>
         </header>
 
-        <main className="w-full max-w-lg">
-          <PaletteGrid 
-            palette={palette} 
-            onSlotClick={handleSlotClick} 
-          />
-          <div className="mt-8 flex justify-center w-full relative z-20">
-            <button 
-              onClick={handleReset}
-              className="text-xs text-gray-500 hover:text-vangogh-indigo uppercase tracking-widest font-sans underline underline-offset-4 transition-colors px-4 py-2"
+        <AnimatePresence mode="wait">
+          {currentView === 'palette' ? (
+            <motion.main 
+              key="palette"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="w-full max-w-lg"
             >
-              Restaurar Paleta Original
-            </button>
-          </div>
-        </main>
+              <PaletteGrid 
+                palette={palette} 
+                onSlotClick={handleSlotClick} 
+              />
+              <div className="mt-8 flex justify-center w-full relative z-20">
+                <button 
+                  onClick={handleReset}
+                  className="text-xs text-gray-500 hover:text-vangogh-indigo uppercase tracking-widest font-sans underline underline-offset-4 transition-colors px-4 py-2"
+                >
+                  Restaurar Paleta Original
+                </button>
+              </div>
+            </motion.main>
+          ) : (
+            <motion.main
+              key="info"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              className="w-full"
+            >
+              <InfoPage onClose={() => setCurrentView('palette')} />
+            </motion.main>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Mobile Bottom Sheet */}
