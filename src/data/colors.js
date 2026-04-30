@@ -1,13 +1,13 @@
 export const existingPalette = [
-  { id: 'p1', name: 'Rosa Escuro', hex: '#E85D75' },
-  { id: 'p2', name: 'Ocre', hex: '#C99635' },
-  { id: 'p3', name: 'Siena Queimada', hex: '#E05836' },
-  { id: 'p4', name: 'Amarelo Pálido', hex: '#F5DE88' },
-  { id: 'p5', name: 'Carmesim', hex: '#A81C2E' },
-  { id: 'p6', name: 'Vermelhão', hex: '#E34234' },
-  { id: 'p7', name: 'Verde Seiva', hex: '#4F7942' },
-  { id: 'p8', name: 'Marrom Escuro', hex: '#422D24' },
-  { id: 'p9', name: 'Índigo', hex: '#2B3359' },
+  { id: 'locked-1', name: 'Perm Lemon Yellow', hex: '#F6E015', code: '254', pigment: 'PY184' },
+  { id: 'locked-2', name: 'Azo Yellow Light', hex: '#FFCC00', code: '268', pigment: 'PY154/PY184' },
+  { id: 'locked-3', name: 'Yellow Ochre', hex: '#E5A83D', code: '227', pigment: 'PY42' },
+  { id: 'locked-4', name: 'Perm Red Light', hex: '#ED271C', code: '370', pigment: 'PR254' },
+  { id: 'locked-5', name: 'Madder Lake Deep', hex: '#B51C34', code: '331', pigment: 'PR264/PV19' },
+  { id: 'locked-6', name: 'Burnt Sienna', hex: '#8D3F28', code: '411', pigment: 'PR101/PBk11' },
+  { id: 'locked-7', name: 'Ultramarine Deep', hex: '#1E3A8A', code: '506', pigment: 'PB29' },
+  { id: 'locked-8', name: 'Cerulean Blue Phth', hex: '#0A74B2', code: '535', pigment: 'PB15/PW6' },
+  { id: 'locked-9', name: 'Sap Green', hex: '#4B713A', code: '623', pigment: 'PY129/PG7' }
 ];
 
 export const catalogColors = [
@@ -45,10 +45,8 @@ export const categories = [
 ];
 
 export const mixingPrimaries = [
-  { id: 'm1', name: 'Carmesim', hex: '#A81C2E' },
-  { id: 'm2', name: 'Amarelo', hex: '#F5DE88' },
-  { id: 'm3', name: 'Índigo', hex: '#2B3359' },
-  { id: 'm4', name: 'Branco', hex: '#F5F5F5' },
-  { id: 'm5', name: 'Preto', hex: '#231F20' },
-  { id: 'm6', name: 'Verde', hex: '#4F7942' },
+  { id: 'mix-y', name: 'Azo Yellow Light', hex: '#FFCC00' },
+  { id: 'mix-r', name: 'Perm Red Light', hex: '#ED271C' },
+  { id: 'mix-b', name: 'Ultramarine Deep', hex: '#1E3A8A' },
+  { id: 'mix-g', name: 'Sap Green', hex: '#4B713A' }
 ];

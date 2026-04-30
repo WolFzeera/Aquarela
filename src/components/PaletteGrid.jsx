@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { Plus, Lock } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -17,6 +17,7 @@ export default function PaletteGrid({ palette, onSlotClick }) {
       <div className="grid grid-cols-3 gap-4">
         {slots.map((color, index) => {
           const isEmpty = !color;
+          const isLocked = index < 9;
           return (
             <motion.div
               key={color ? `slot-${index}-${color.id}` : `slot-${index}-empty`}
@@ -24,15 +25,17 @@ export default function PaletteGrid({ palette, onSlotClick }) {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.05 }}
               className={cn(
-                "w-full aspect-square rounded-lg flex items-center justify-center relative cursor-pointer",
-                isEmpty ? "border-2 border-dashed border-gray-400 bg-black/5" : "shadow-md hover:ring-2 hover:ring-vangogh-indigo/50"
+                "w-full aspect-square rounded-lg flex flex-col items-center justify-center relative",
+                isLocked ? "cursor-default shadow-sm border border-black/5" : "cursor-pointer",
+                !isLocked && isEmpty ? "border-2 border-dashed border-gray-400 bg-black/5" : "",
+                !isLocked && !isEmpty ? "shadow-md hover:ring-2 hover:ring-vangogh-indigo/50" : ""
               )}
               style={color ? { backgroundColor: color.hex } : {}}
-              onClick={() => onSlotClick(index)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={() => !isLocked && onSlotClick(index)}
+              whileHover={!isLocked ? { scale: 1.05 } : {}}
+              whileTap={!isLocked ? { scale: 0.95 } : {}}
             >
-              {isEmpty ? (
+              {isEmpty && !isLocked ? (
                 <motion.div
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ repeat: Infinity, duration: 2 }}
@@ -40,7 +43,19 @@ export default function PaletteGrid({ palette, onSlotClick }) {
                   <Plus className="text-gray-500 w-8 h-8" />
                 </motion.div>
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg mix-blend-overlay pointer-events-none"></div>
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg mix-blend-overlay pointer-events-none"></div>
+                  {isLocked && (
+                    <div className="absolute top-1 right-1 opacity-40">
+                      <Lock className="w-3 h-3 text-white mix-blend-difference" />
+                    </div>
+                  )}
+                  {color && !isLocked && (
+                    <div className="absolute -bottom-6 w-full text-center">
+                      <span className="text-[10px] font-sans text-gray-500 uppercase tracking-widest">{color.name.split(' + ')[0]}</span>
+                    </div>
+                  )}
+                </>
               )}
             </motion.div>
           );
@@ -48,7 +63,7 @@ export default function PaletteGrid({ palette, onSlotClick }) {
       </div>
       <div className="mt-6 text-center">
         <h2 className="text-2xl text-vangogh-deepBrown tracking-wide">Estojo Van Gogh</h2>
-        <p className="text-sm font-sans text-gray-600 mt-1">Toque em qualquer cor para substituir ou descobrir novas cores.</p>
+        <p className="text-sm font-sans text-gray-600 mt-1">Toque nos espaços vazios (Discovery Slots) para experimentar.</p>
       </div>
     </div>
   );

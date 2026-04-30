@@ -8,27 +8,28 @@ import Catalog from './components/Catalog';
 
 function App() {
   const [palette, setPalette] = useState(() => {
-    const saved = localStorage.getItem('aquarelaPalette');
+    const saved = localStorage.getItem('aquarelaPalette_v2');
+    const defaultPalette = [...existingPalette, null, null, null];
     if (saved) {
       try {
         return JSON.parse(saved);
       } catch (e) {
-        return existingPalette;
+        return defaultPalette;
       }
     }
-    return existingPalette;
+    return defaultPalette;
   });
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [activeSlotIndex, setActiveSlotIndex] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem('aquarelaPalette', JSON.stringify(palette));
+    localStorage.setItem('aquarelaPalette_v2', JSON.stringify(palette));
   }, [palette]);
 
   const handleReset = () => {
-    setPalette(existingPalette);
-    localStorage.removeItem('aquarelaPalette');
+    setPalette([...existingPalette, null, null, null]);
+    localStorage.removeItem('aquarelaPalette_v2');
   };
 
   const handleSlotClick = (index) => {
