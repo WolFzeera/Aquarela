@@ -19,7 +19,7 @@ export default function PaletteGrid({ palette, onSlotClick }) {
           const isEmpty = !color;
           return (
             <motion.div
-              key={index}
+              key={color ? `slot-${index}-${color.id}` : `slot-${index}-empty`}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.05 }}
