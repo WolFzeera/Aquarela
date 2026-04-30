@@ -76,8 +76,11 @@ export default function InfoPage({ onClose }) {
         <p className="text-sm md:text-base font-sans text-gray-700 leading-relaxed mb-4">
           Produzida na Holanda pela Royal Talens, a linha Van Gogh Professional é concebida para artistas que exigem excelência, durabilidade e pureza. Cada pastilha nesta paleta foi meticulosamente selecionada para oferecer a máxima <strong>resistência à luz (lightfastness)</strong>.
         </p>
+        <p className="text-sm md:text-base font-sans text-gray-700 leading-relaxed mb-4">
+          A fabricação utiliza uma moagem de pigmentos extrafina, garantindo cores incrivelmente limpas. O aglutinante principal é a <strong>Goma Arábica Pura</strong>, que assegura que o pigmento adira ao papel com máxima transparência, sem deixar resíduos "gizes" ou opacidade indesejada.
+        </p>
         <p className="text-sm md:text-base font-sans text-gray-700 leading-relaxed">
-          Para muralistas, a longevidade do pigmento é crucial. As cores ancoradas no seu estojo principal mantêm sua integridade cromática mesmo sob exposição severa, garantindo que a vibração da sua arte resista ao teste do tempo.
+          Para muralistas e aquarelistas de alto nível, a longevidade e a alta carga pigmentar (pigment load) são cruciais. As cores ancoradas no seu estojo principal mantêm sua integridade cromática mesmo sob exposição contínua e diluição extrema.
         </p>
       </section>
 
