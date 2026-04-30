@@ -42,11 +42,6 @@ export default function PaletteGrid({ palette, onSlotClick }) {
               ) : (
                 <>
                   <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg mix-blend-overlay pointer-events-none"></div>
-                  {color && (
-                    <div className="absolute -bottom-6 w-full text-center">
-                      <span className="text-[10px] font-sans text-gray-500 uppercase tracking-widest">{color.name.split(' + ')[0]}</span>
-                    </div>
-                  )}
                 </>
               )}
             </motion.div>

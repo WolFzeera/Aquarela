@@ -147,7 +147,7 @@ export default function InfoPage({ onClose }) {
                 ))}
               </div>
               <p className="text-xs font-sans text-gray-600 leading-relaxed">{harmony.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
