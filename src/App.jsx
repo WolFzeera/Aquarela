@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PaletteGrid from './components/PaletteGrid';
 import BottomSheet from './components/BottomSheet';
@@ -7,10 +7,29 @@ import MixingSwatches from './components/MixingSwatches';
 import Catalog from './components/Catalog';
 
 function App() {
-  const [palette, setPalette] = useState(existingPalette);
+  const [palette, setPalette] = useState(() => {
+    const saved = localStorage.getItem('aquarelaPalette');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        return existingPalette;
+      }
+    }
+    return existingPalette;
+  });
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [activeSlotIndex, setActiveSlotIndex] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem('aquarelaPalette', JSON.stringify(palette));
+  }, [palette]);
+
+  const handleReset = () => {
+    setPalette(existingPalette);
+    localStorage.removeItem('aquarelaPalette');
+  };
 
   const handleSlotClick = (index) => {
     setActiveSlotIndex(index);
@@ -56,6 +75,14 @@ function App() {
             palette={palette} 
             onSlotClick={handleSlotClick} 
           />
+          <div className="mt-8 flex justify-center w-full relative z-20">
+            <button 
+              onClick={handleReset}
+              className="text-xs text-gray-500 hover:text-vangogh-indigo uppercase tracking-widest font-sans underline underline-offset-4 transition-colors px-4 py-2"
+            >
+              Restaurar Paleta Original
+            </button>
+          </div>
         </main>
       </div>
 

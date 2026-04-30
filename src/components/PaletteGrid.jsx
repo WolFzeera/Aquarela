@@ -40,7 +40,7 @@ export default function PaletteGrid({ palette, onSlotClick }) {
                   <Plus className="text-gray-500 w-8 h-8" />
                 </motion.div>
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg mix-blend-overlay"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg mix-blend-overlay pointer-events-none"></div>
               )}
             </motion.div>
           );

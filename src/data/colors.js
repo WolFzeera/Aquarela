@@ -48,4 +48,7 @@ export const mixingPrimaries = [
   { id: 'm1', name: 'Carmesim', hex: '#A81C2E' },
   { id: 'm2', name: 'Amarelo', hex: '#F5DE88' },
   { id: 'm3', name: 'Índigo', hex: '#2B3359' },
+  { id: 'm4', name: 'Branco', hex: '#F5F5F5' },
+  { id: 'm5', name: 'Preto', hex: '#231F20' },
+  { id: 'm6', name: 'Verde', hex: '#4F7942' },
 ];
